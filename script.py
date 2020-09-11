@@ -1,7 +1,7 @@
 import requests # to download page
 from bs4 import BeautifulSoup # to parse the contents
 import time # to wait until requests
-import smtplib # email capabilities
+import smtplib, ssl # email capabilities
 import os # to import ENV variables
 
 #url = os.environ['URL']
@@ -13,8 +13,21 @@ header = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWe
 #to trick SINU into giving handsahke
 requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS = 'ALL:@SECLEVEL=1'
 
+destination_email = "raresp98@gmail.com"
+sender_email = "atom.automated@gmail.com"
+password = "atomPi123456"
+port = 465
+smtp_server = "smtp.gmail.com"
+
 def sendEmail():
-    print("test")
+    #message = "The website " + url + " seems to have changed its state."
+    message = "Check the website!"
+    print(message)
+    context = ssl.create_default_context()
+    with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+        server.login(sender_email, password)
+        server.sendmail(sender_email, destination_email, message)
+
 
 def main():
     sendEmail()
