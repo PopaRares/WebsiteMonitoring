@@ -4,16 +4,15 @@ import time # to wait until requests
 import smtplib, ssl # email capabilities
 import os # to import ENV variables
 
-#url = os.environ['URL']
-url = 'https://ac.utcluj.ro/cazare.html'
+url = os.environ['URL']
 wait_time = int(os.environ['WAIT'])
+destination_email = os.environ['DESTINATION']
 
 #to trick website that we are a real person
 header = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
 #to trick SINU into giving handsahke
 requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS = 'ALL:@SECLEVEL=1'
 
-destination_email = "raresp98@gmail.com"
 sender_email = "atom.automated@gmail.com"
 password = "atomPi123456"
 port = 465
